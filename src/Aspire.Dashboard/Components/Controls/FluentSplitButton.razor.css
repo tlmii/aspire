@@ -1,0 +1,14 @@
+::deep.split-button-container {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+::deep fluent-button.split-button-primary-button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+::deep fluent-button.split-button-menu-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

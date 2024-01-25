@@ -71,6 +71,17 @@
                     <TemplateColumn Title="@Loc[nameof(Dashboard.Resources.Resources.ResourcesLogsColumnHeader)]">
                         <FluentAnchor Appearance="Appearance.Lightweight" Href="@($"/ConsoleLogs/{context.Name}")">@ControlsStringsLoc[ControlsStrings.ViewAction]</FluentAnchor>
                     </TemplateColumn>
+                    <TemplateColumn Title="Monitoring">
+                        @{
+                            var items = new Dictionary<string, string>()
+                            {
+                                { "Structured logs", "/StructuredLogs" },
+                                { "Traces", "/Traces" },
+                                { "Metrics", "/Metrics" }
+                            };
+                        }
+                        <FluentSplitButton Text="Console logs" Items="items" OnMenuChanged="(e) => NavigationManager.NavigateTo(e.Value!)" />
+                    </TemplateColumn>
                     <TemplateColumn Title="@Loc[nameof(Dashboard.Resources.Resources.ResourcesDetailsColumnHeader)]" Sortable="false">
                         <FluentButton Appearance="Appearance.Lightweight"
                                       Title="@ControlsStringsLoc[nameof(ControlsStrings.ViewAction)]"

@@ -1,0 +1,56 @@
+﻿@inherits FluentComponentBase
+
+<div class="split-button-container">
+    <FluentButton Appearance="@Appearance" Class="split-button-primary-button">
+        @Text
+    </FluentButton>
+    <FluentButton id="@_buttonAnchorId" Appearance="@Appearance" Class="split-button-menu-button" IconEnd="new Icons.Regular.Size20.ChevronDown()"
+                  @onclick="ToggleMenu" @onkeydown="OnKeyDown" aria-expanded="@_menuVisible" aria-haspopup="true"/>
+    <FluentMenu  Anchor="@_buttonAnchorId" @bind-Open="@_menuVisible" @onmenuchange="OnMenuChange" HorizontalPosition="HorizontalPosition.Left">
+        @foreach (KeyValuePair<string, string> item in Items)
+        {
+            <FluentMenuItem>@item.Key</FluentMenuItem>
+        }
+    </FluentMenu>
+</div>
+
+@code {
+
+    private string _buttonAnchorId = $"anchor-{Guid.NewGuid().ToString("N")}";
+    private bool _menuVisible;
+
+    [Parameter]
+    public string? Text { get; set; }
+
+    [Parameter]
+    public Appearance Appearance { get; set; } = Appearance.Accent;
+
+    [Parameter]
+    public Dictionary<string, string> Items { get; set; } = [];
+
+    [Parameter]
+
+    public EventCallback<MenuChangeEventArgs> OnMenuChanged { get; set; }
+
+    private void ToggleMenu()
+    {
+        _menuVisible = !_menuVisible;
+    }
+
+    private async Task OnMenuChange(MenuChangeEventArgs args)
+    {
+        if (args is not null && args.Id is not null)
+        {
+            await OnMenuChanged.InvokeAsync(args);
+        }
+        _menuVisible = false;
+    }
+
+    private void OnKeyDown(KeyboardEventArgs args)
+    {
+        if (args is not null && args.Key == "Escape")
+        {
+            _menuVisible = false;
+        }
+    }
+}
