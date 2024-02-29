@@ -33,7 +33,7 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
-        "icon head"
+        "icon icon"
         "nav main";
     background-color: var(--fill-color);
     color: var(--neutral-foreground-rest);
