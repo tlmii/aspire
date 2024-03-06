@@ -61,6 +61,24 @@ namespace Aspire.Dashboard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Command not implemented.
+        /// </summary>
+        public static string ResourceCommandErrorNotImplemented {
+            get {
+                return ResourceManager.GetString("ResourceCommandErrorNotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error. See logs for details.
+        /// </summary>
+        public static string ResourceCommandErrorUnknown {
+            get {
+                return ResourceManager.GetString("ResourceCommandErrorUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot; command failed.
         /// </summary>
         public static string ResourceCommandFailed {

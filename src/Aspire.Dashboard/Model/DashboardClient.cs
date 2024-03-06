@@ -10,6 +10,7 @@ using Aspire.V1;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Aspire.Dashboard.Model;
 
@@ -44,6 +45,7 @@ internal sealed class DashboardClient : IDashboardClient
     private readonly ILoggerFactory _loggerFactory;
     private readonly IConfiguration _configuration;
     private readonly ILogger<DashboardClient> _logger;
+    private readonly IStringLocalizer<Resources.Resources> _resourcesLoc;
 
     private ImmutableHashSet<Channel<ResourceViewModelChange>> _outgoingChannels = [];
     private string? _applicationName;
@@ -59,10 +61,11 @@ internal sealed class DashboardClient : IDashboardClient
 
     private Task? _connection;
 
-    public DashboardClient(ILoggerFactory loggerFactory, IConfiguration configuration)
+    public DashboardClient(ILoggerFactory loggerFactory, IConfiguration configuration, IStringLocalizer<Resources.Resources> resourcesLoc)
     {
         _loggerFactory = loggerFactory;
         _configuration = configuration;
+        _resourcesLoc = resourcesLoc;
 
         // Take a copy of the token and always use it to avoid race between disposal of CTS and usage of token.
         _clientCancellationToken = _cts.Token;
@@ -408,7 +411,9 @@ internal sealed class DashboardClient : IDashboardClient
         {
             _logger.LogError(ex, "Error executing command \"{CommandType}\" on resource \"{ResourceName}\": {StatusCode}", command.CommandType, resourceName, ex.StatusCode);
 
-            var errorMessage = ex.StatusCode == StatusCode.Unimplemented ? "Command not implemented" : "Unknown error. See logs for details";
+            var errorMessage = ex.StatusCode == StatusCode.Unimplemented
+                               ? _resourcesLoc[nameof(Resources.Resources.ResourceCommandErrorNotImplemented)]
+                               : _resourcesLoc[nameof(Resources.Resources.ResourceCommandErrorUnknown)];
 
             return new ResourceCommandResponseViewModel()
             {
