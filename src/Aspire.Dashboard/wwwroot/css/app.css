@@ -356,3 +356,25 @@ fluent-switch.table-switch::part(label) {
     top: 50px;
     right: calc(var(--design-unit) * 1.5px);
 }
+
+fluent-data-grid-row[row-type=default]:hover,
+fluent-data-grid-row[row-type=default]:hover fluent-button[appearance=stealth]:not(:hover)::part(control),
+fluent-data-grid-row[row-type=default]:hover fluent-button[appearance=lightweight]:not(:hover)::part(control),
+fluent-data-grid-row[row-type=default]:hover fluent-anchor[appearance=stealth]:not(:hover)::part(control),
+fluent-data-grid-row[row-type=default]:hover fluent-anchor[appearance=lightweight]:not(:hover)::part(control) {
+    background-color: var(--neutral-fill-secondary-hover);
+}
+
+fluent-data-grid-row[row-type=default]:hover fluent-button[appearance=stealth]:hover::part(control),
+fluent-data-grid-row[row-type=default]:hover fluent-button[appearance=lightweight]:hover::part(control),
+fluent-data-grid-row[row-type=default]:hover fluent-anchor[appearance=stealth]:hover::part(control),
+fluent-data-grid-row[row-type=default]:hover fluent-anchor[appearance=lightweight]:hover::part(control) {
+    background-color: var(--neutral-fill-input-alt-hover);
+}
+
+[data-theme="dark"] fluent-data-grid-row[row-type=default]:hover fluent-button[appearance=stealth]:hover::part(control),
+[data-theme="dark"] fluent-data-grid-row[row-type=default]:hover fluent-button[appearance=lightweight]:hover::part(control),
+[data-theme="dark"] fluent-data-grid-row[row-type=default]:hover fluent-anchor[appearance=stealth]:hover::part(control),
+[data-theme="dark"] fluent-data-grid-row[row-type=default]:hover fluent-anchor[appearance=lightweight]:hover::part(control) {
+    background-color: var(--neutral-fill-stealth-hover-on-neutral-fill-layer-rest);
+}

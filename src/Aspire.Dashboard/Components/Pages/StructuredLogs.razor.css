@@ -23,15 +23,15 @@
     grid-area: main;
 }
 
-::deep .log-row-critical {
+::deep fluent-data-grid-row.log-row-critical:not(:hover) {
     background-color: var(--log-critical);
 }
 
-::deep .log-row-error {
+::deep fluent-data-grid-row.log-row-error:not(:hover) {
     background-color: var(--log-error);
 }
 
-::deep .log-row-warning {
+::deep fluent-data-grid-row.log-row-warning:not(:hover) {
     background-color: var(--log-warning);
 }
 
