@@ -57,6 +57,8 @@ public sealed class DashboardWebApplication : IAsyncDisposable
     {
         var builder = WebApplication.CreateBuilder();
 
+        builder.Configuration["Frontend:AuthMode"] = "Unsecured";
+
         configureBuilder?.Invoke(builder);
 
 #if !DEBUG

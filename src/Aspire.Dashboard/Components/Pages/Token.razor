@@ -1,0 +1,20 @@
+﻿@page "/token"
+@layout EmptyLayout
+
+<div class="token-backdrop">
+    <div class="token-container">
+        <div class="token-logo">
+            <AspireLogo Height="96" Width="96" />
+        </div>
+        <div class="token-header">
+            <span>Token</span>
+        </div>
+        <div class="token-entry">
+            <FluentTextField Placeholder="Enter Token..." Class="token-entry-text" />
+            <FluentIcon Value="@(new Icons.Regular.Size20.QuestionCircle())" />
+        </div>
+        <div class="token-footer">
+            <a href="#" target="_blank">More Info</a>
+        </div>
+    </div>
+</div>
